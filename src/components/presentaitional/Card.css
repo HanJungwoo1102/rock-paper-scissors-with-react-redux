@@ -1,0 +1,12 @@
+.card {
+    padding: 10px 5px;
+    font-size: 12px;
+    border-radius: 4px;
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.app-title {
+    text-align: center;
+}

@@ -1,0 +1,13 @@
+.score-play {
+    display: flex;
+    justify-content: center;
+}
+
+.score-play > .score-player {
+    width: 100px;
+    margin: 5px;
+}
+
+.score-play > .win {
+    border: 1px solid #ff0000;
+}

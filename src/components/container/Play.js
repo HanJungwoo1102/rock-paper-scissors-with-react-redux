@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { isDraw } from '../../lib/rock-paper-scissors';
@@ -8,8 +8,7 @@ import * as resultActions from '../../actions/result';
 
 import Player from '../presentaitional/Player';
 import Circle from '../presentaitional/Circle';
-import CardPannel from '../presentaitional/CardPannel';
-import PlayTimeManager from './PlayTimeManager';
+import CardPanel from '../presentaitional/CardPanel';
 
 import { ROCK_PAPER_SCISSORS } from '../../constants/rock-paper-scissors';
 import { PLAYER_ID } from '../../constants/player';
@@ -46,20 +45,20 @@ export default () => {
             dispatch(gameActions.endPlay());
         }
     }, [playStatus.timerCount]);
-
+    
     return (
-        <PlayTimeManager>
+        <>
             <Player name='PLAYER 1'>
-                <Circle show={playResult[PLAYER_ID.PLAYER1]} />
-                <CardPannel
+                <Circle text={ROCK_PAPER_SCISSORS[PLAYER_ID.PLAYER1]} />
+                <CardPanel
                     rockClickHandler={() => dispatch(resultActions.showRockPaperScissors(PLAYER_ID.PLAYER1, ROCK_PAPER_SCISSORS.ROCK))}
                     paperClickHandler={() => dispatch(resultActions.showRockPaperScissors(PLAYER_ID.PLAYER1, ROCK_PAPER_SCISSORS.PAPER))}
                     scissorsClickHandler={() => dispatch(resultActions.showRockPaperScissors(PLAYER_ID.PLAYER1, ROCK_PAPER_SCISSORS.SCISSORS))}
                 />
             </Player>
             <Player name='PLAYER 2'>
-                <Circle show={playResult[PLAYER_ID.PLAYER2]} />
+                <Circle text={ROCK_PAPER_SCISSORS[PLAYER_ID.PLAYER2]} />
             </Player>
-        </PlayTimeManager>
+        </>
     );
 };

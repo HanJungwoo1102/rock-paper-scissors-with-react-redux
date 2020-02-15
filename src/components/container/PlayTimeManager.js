@@ -5,7 +5,7 @@ import * as statusActions from '../../actions/status';
 
 import Count from '../presentaitional/Count';
 
-export default ({ children }) => {
+export default () => {
     const dispatch = useDispatch();
     const { play: playStatus } = useSelector((state) => state.status);
 
@@ -26,11 +26,6 @@ export default ({ children }) => {
     }, [playStatus.isStart, timerId]);
 
     return (
-        <>
-            <Count count={playStatus.timerCount} />
-            {
-                children
-            }
-        </>
+        <Count count={playStatus.timerCount} />
     );
 };

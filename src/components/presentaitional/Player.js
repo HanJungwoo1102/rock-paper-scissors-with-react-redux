@@ -1,12 +1,12 @@
 import React from 'react';
 
+import './Player.css';
+
 export default ({ name, children }) => {
     return (
-        <div>
+        <div className="player">
             <div>{name}</div>
-            <div>
-                {children}
-            </div>
+            {children}
         </div>
     )
 };

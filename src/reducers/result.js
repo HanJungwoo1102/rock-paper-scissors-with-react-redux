@@ -35,6 +35,15 @@ const resultReducer = (state = initialState, action) => {
                 ...state,
                 game: [],
             };
+        case END_GAME:
+            return {
+                ...state,
+                set: [],
+                play: {
+                    player1: null,
+                    player2: null,
+                },
+            }
         case START_SET:
             return {
                 ...state,

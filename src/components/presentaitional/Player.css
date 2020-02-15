@@ -1,0 +1,11 @@
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+}
+
+.player > div {
+    margin-bottom: 20px;
+    font-weight: 500;
+}

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { ROCK_PAPER_SCISSORS_IMAGE } from '../../constants/rock-paper-scissors';
+import './Circle.css';
 
-export default ({ show }) => {
+export default ({ text }) => {
     return (
-        <div>
-            <img src={ROCK_PAPER_SCISSORS_IMAGE[show]}/>
+        <div className="circle">
+            {text}
         </div>
     );
 };

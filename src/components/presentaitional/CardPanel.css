@@ -1,0 +1,7 @@
+.card-panel {
+    display: flex;
+}
+
+.card-panel > .card {
+    margin: 5px;
+}

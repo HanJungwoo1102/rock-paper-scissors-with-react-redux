@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default ({ image, clickHandler }) => {
+import './Card.css';
+
+export default ({ text, clickHandler }) => {
     return (
-        <div onClick={clickHandler}>
-            <img src={image}/>
+        <div className="card" onClick={clickHandler}>
+            {text}
         </div>
     );
 };
