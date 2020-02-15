@@ -26,8 +26,6 @@ const initialState = {
 
 const resultReducer = (state = initialState, action) => {
     const { type, payload } = action;
-    
-    console.log('reducer-',type);
 
     switch (type) {
         case START_GAME:
