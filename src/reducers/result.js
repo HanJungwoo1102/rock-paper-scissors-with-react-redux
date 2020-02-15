@@ -38,6 +38,7 @@ const resultReducer = (state = initialState, action) => {
                 ...state,
                 set: [],
                 play: {
+                    ...state.play,
                     player1: null,
                     player2: null,
                 },
@@ -56,6 +57,7 @@ const resultReducer = (state = initialState, action) => {
             return {
                 ...state,
                 play: {
+                    ...state.play,
                     player1: null,
                     player2: Object.values(ROCK_PAPER_SCISSORS)[Math.floor(Math.random()*3)],
                 },
