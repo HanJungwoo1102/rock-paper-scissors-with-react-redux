@@ -1,5 +1,6 @@
 // action types
 export const START_GAME = 'status/START_GAME';
+export const STOP_GAME = 'status/STOP_GAME';
 export const END_GAME = 'status/END_GAME';
 
 export const START_SET = 'status/START_SET';
@@ -8,12 +9,21 @@ export const END_SET = 'status/END_SET';
 export const START_PLAY = 'status/START_PLAY';
 export const END_PLAY = 'status/END_PLAY';
 
-export const COUNT_DOWN_TIMER = 'status/COUNT_DOWN_TIMER';
+export const START_COUNTING = 'status/START_COUNTING';
+export const SET_TIMER_COUNT = 'status/SET_TIMER_COUNT';
+export const COUNT_OVER = 'status/COUNT_OVER';
+export const STOP_COUNTING = 'status/STOP_COUNTING';
 
 // action creator
 export const startGame = () => {
     return {
         type: START_GAME,
+    };
+};
+
+export const stopGame = () => {
+    return {
+        type: STOP_GAME,
     };
 };
 
@@ -47,8 +57,32 @@ export const endPlay = () => {
     };
 };
 
-export const countDown = () => {
+export const startCounting = (maxPlayTime) => {
     return {
-        type: COUNT_DOWN_TIMER,
-    }
-}
+        type: START_COUNTING,
+        payload: {
+            maxPlayTime,
+        },
+    };
+};
+
+export const setTimerCount = (newTimerCount) => {
+    return {
+        type: SET_TIMER_COUNT,
+        payload: {
+            newTimerCount,
+        },
+    };
+};
+
+export const countOver = () => {
+    return {
+        type: COUNT_OVER,
+    };
+};
+
+export const stopCounting = () => {
+    return {
+        type: STOP_COUNTING,
+    };
+};

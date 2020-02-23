@@ -1,44 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as statusActions from '../../actions/status';
+import * as resultActions from '../../actions/result';
 
-import Play from './Play';
+import Player from '../presentaitional/Player';
+import Circle from '../presentaitional/Circle';
+import CardPanel from '../presentaitional/CardPanel';
 
-import { MAX_PLAY_COUNT, MAX_SET_COUNT } from '../../constants/game-setting';
+import { ROCK_PAPER_SCISSORS_TYPE } from '../../constants/rock-paper-scissors';
+import { PLAYER_ID } from '../../constants/player';
 
 export default () => {
     const dispatch = useDispatch();
-    const { game: gameResult, set: setResult } = useSelector((state) => state.result);
-    const { game: gameStatus, set: setStatus } = useSelector((state) => state.status);
+    const { play: playStatus } = useSelector(state => state.status);
+    const { play: playResult } = useSelector(state => state.result);
+
+    const [handOfPlayer1, setHandOfPlayer1] = useState('');
+    const [handOfPlayer2, setHandOfPlayer2] = useState('');
 
     useEffect(() => {
-        if (gameStatus.isStart && !setStatus.isStart && gameResult.length < MAX_SET_COUNT) {
-            // 게임 시작했고 세트 시작 안했고
-            // 이제까지 한 세트수가 최대 세트 수 안넘었을 경우 start set
-            dispatch(statusActions.startSet());
+        if (playStatus.isStart) {
+            setHandOfPlayer1('');
+            setHandOfPlayer2('');
+        } else {
+            setHandOfPlayer1(playResult[PLAYER_ID.PLAYER1]);
+            setHandOfPlayer2(playResult[PLAYER_ID.PLAYER2]);
         }
-    }, [gameStatus.isStart, setStatus.isStart, gameResult]);
-
-    useEffect(() => {
-        if (setResult.length >= MAX_PLAY_COUNT) {
-            // 세트 당 판 수 채우면 세트 종료
-            dispatch(statusActions.endSet());
-        }
-    }, [setResult]);
-
-    useEffect(() => {
-        // 게임 당 세트 수 채우면 게임 종료
-        if (gameResult.length >= MAX_SET_COUNT) {
-            dispatch(statusActions.endGame());
-        }
-    }, [gameResult]);
+    }, [playStatus.isStart, playResult]);
 
     return (
         <>
-            <div className="play-wrapper">
-                <Play/>
-            </div>
+            <Player name='PLAYER 1'>
+                <Circle text={handOfPlayer1} />
+                <CardPanel
+                    rockClickHandler={() => dispatch(resultActions.setResultOfPlay(PLAYER_ID.PLAYER1, ROCK_PAPER_SCISSORS_TYPE.ROCK))}
+                    paperClickHandler={() => dispatch(resultActions.setResultOfPlay(PLAYER_ID.PLAYER1, ROCK_PAPER_SCISSORS_TYPE.PAPER))}
+                    scissorsClickHandler={() => dispatch(resultActions.setResultOfPlay(PLAYER_ID.PLAYER1, ROCK_PAPER_SCISSORS_TYPE.SCISSORS))}
+                />
+            </Player>
+            <Player name='PLAYER 2'>
+                <Circle text={handOfPlayer2} />
+            </Player>
         </>
     );
 };

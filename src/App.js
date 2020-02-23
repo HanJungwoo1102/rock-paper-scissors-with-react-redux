@@ -2,8 +2,8 @@ import React from 'react';
 
 import Game from './components/container/Game';
 import Score from './components/container/Score';
-import PlayTimeManager from './components/container/PlayTimeManager';
-import GameStartButton from './components/container/GameStartButton';
+import PlayTime from './components/container/PlayTime';
+import GameButtonContainer from './components/container/GameButtonContainer';
 
 import './App.css';
 
@@ -11,12 +11,12 @@ function App() {
     return (
         <div className="App">
             <div className="app-title">Rock Paper Scissors</div>
-            <PlayTimeManager/>
+            <PlayTime/>
             <div className="game-wrapper">
                 <Game/>
             </div>
             <div className="button-container">
-                <GameStartButton/>
+                <GameButtonContainer/>
             </div>
             <div className="score-wrapper">
                 <Score/>

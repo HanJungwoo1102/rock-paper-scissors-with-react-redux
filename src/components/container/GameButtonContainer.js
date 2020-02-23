@@ -20,19 +20,14 @@ export default () => {
                 <>
                     <div className="game-button"
                         onClick={() => {
+                            dispatch(statusActions.stopGame());
                             dispatch(statusActions.startGame());
-                            dispatch(statusActions.startPlay());
-                            dispatch(statusActions.startSet());
                         }}
                     >
                         RESTART
                     </div>
                     <div className="game-button"
-                        onClick={() => {
-                            dispatch(statusActions.endSet());
-                            dispatch(statusActions.endPlay());
-                            dispatch(statusActions.endGame());
-                        }}
+                        onClick={() => dispatch(statusActions.stopGame())}
                     >
                         END
                     </div>

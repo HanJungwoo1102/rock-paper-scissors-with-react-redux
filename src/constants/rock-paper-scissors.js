@@ -1,4 +1,4 @@
-export const ROCK_PAPER_SCISSORS = {
+export const ROCK_PAPER_SCISSORS_TYPE = {
     ROCK: 'ROCK',
     PAPER: 'PAPER',
     SCISSORS: 'SCISSORS',

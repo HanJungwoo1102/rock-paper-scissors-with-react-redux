@@ -1,12 +1,10 @@
 import * as gameActions from '../actions/status';
 
-import { MAX_PLAY_TIME } from '../constants/game-setting';
-
 const {
     START_GAME, END_GAME,
     START_SET, END_SET,
     START_PLAY, END_PLAY,
-    COUNT_DOWN_TIMER,
+    START_COUNTING, SET_TIMER_COUNT,
 } = gameActions;
 
 const initialState = {
@@ -23,7 +21,7 @@ const initialState = {
 };
 
 const statusReducer = (state = initialState, action) => {
-    const { type } = action;
+    const { type, payload } = action;
 
     switch (type) {
         case START_GAME:
@@ -60,7 +58,6 @@ const statusReducer = (state = initialState, action) => {
                 play: {
                     ...state.play,
                     isStart: true,
-                    timerCount: MAX_PLAY_TIME,
                 },
             };
         case END_PLAY:
@@ -71,15 +68,27 @@ const statusReducer = (state = initialState, action) => {
                     isStart: false,
                 },
             };
-        case COUNT_DOWN_TIMER: {
+        case START_COUNTING:
+            const { maxPlayTime } = payload;
             return {
                 ...state,
                 play: {
                     ...state.play,
-                    timerCount: state.play.timerCount -1,
+                    timerCount: maxPlayTime,
                 }
-            }
-        }
+            };
+        case SET_TIMER_COUNT:
+            return {
+                ...state,
+                play: {
+                    ...state.play,
+                    timerCount: payload.newTimerCount,
+                }
+            };
+        case gameActions.STOP_COUNTING:
+            return {
+                ...state,
+            };
         default:
             return state;
     }

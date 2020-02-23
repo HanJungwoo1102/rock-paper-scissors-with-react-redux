@@ -2,7 +2,7 @@ import React from 'react';
 
 import Card from './Card';
 
-import { ROCK_PAPER_SCISSORS_IMAGE, ROCK_PAPER_SCISSORS } from '../../constants/rock-paper-scissors';
+import { ROCK_PAPER_SCISSORS_TYPE } from '../../constants/rock-paper-scissors';
 
 import './CardPanel.css';
 
@@ -10,15 +10,15 @@ export default ({ rockClickHandler, paperClickHandler, scissorsClickHandler }) =
     return (
         <div className="card-panel">
             <Card
-                text={ROCK_PAPER_SCISSORS.ROCK}
+                text={ROCK_PAPER_SCISSORS_TYPE.ROCK}
                 clickHandler={rockClickHandler}
             />
             <Card
-                text={ROCK_PAPER_SCISSORS.PAPER}
+                text={ROCK_PAPER_SCISSORS_TYPE.PAPER}
                 clickHandler={paperClickHandler}
             />
             <Card
-                text={ROCK_PAPER_SCISSORS.SCISSORS}
+                text={ROCK_PAPER_SCISSORS_TYPE.SCISSORS}
                 clickHandler={scissorsClickHandler}
             />
         </div>

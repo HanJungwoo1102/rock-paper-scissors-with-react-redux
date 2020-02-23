@@ -1,16 +1,11 @@
-import * as gameActions from '../actions/status';
 import * as resultActions from '../actions/result';
 
 import { PLAYER_ID } from '../constants/player';
 
-import { ROCK_PAPER_SCISSORS } from '../constants/rock-paper-scissors';
-
 const {
-    START_GAME, END_GAME,
-    START_SET, END_SET,
-    START_PLAY, END_PLAY,
-} = gameActions;
-const { SHOW_ROCK_PAPER_SCISSORS } = resultActions;
+    INIT_RESULT_OF_GAME, INIT_RESULT_OF_PLAY, INIT_RESULT_OF_SET,
+    ADD_RESULT_OF_SET_TO_RESULT_OF_GAME, ADD_RESULT_OF_PLAY_TO_RESULT_OF_SET, SET_RESULT_OF_PLAY,
+} = resultActions;
 
 const initialStatePlay = Object.values(PLAYER_ID).reduce((acc, curId) => {
     const newPlay = { ...acc }
@@ -26,54 +21,55 @@ const initialState = {
 
 const resultReducer = (state = initialState, action) => {
     const { type, payload } = action;
-
     switch (type) {
-        case START_GAME:
+        case INIT_RESULT_OF_GAME: {
             return {
                 ...state,
                 game: [],
             };
-        case END_GAME:
-            return {
-                ...state,
-                set: [],
-                play: {
-                    ...state.play,
-                    player1: null,
-                    player2: null,
-                },
-            }
-        case START_SET:
+        }
+        case INIT_RESULT_OF_SET: {
             return {
                 ...state,
                 set: [],
             };
-        case END_SET:
-            return {
-                ...state,
-                game: [...state.game, state.set],
-            };
-        case START_PLAY:
+        }
+        case INIT_RESULT_OF_PLAY: {
             return {
                 ...state,
                 play: {
-                    ...state.play,
-                    player1: null,
-                    player2: Object.values(ROCK_PAPER_SCISSORS)[Math.floor(Math.random()*3)],
-                },
-            };
-        case END_PLAY:
-            return {
-                ...state,
-                set: [...state.set, state.play],
+                    ...initialStatePlay,
+                }
             }
-        case SHOW_ROCK_PAPER_SCISSORS:
-            const newPlay = { ...state.play };
-            newPlay[payload.playerId] = payload.rockPaperScissorsType;
+        }
+        case ADD_RESULT_OF_SET_TO_RESULT_OF_GAME: {
+            const { resultOfSet } = payload;
+            const newResultOfSet = [...resultOfSet];
+
             return {
                 ...state,
-                play: newPlay,
+                game: [...state.game, newResultOfSet],
             };
+        }
+        case ADD_RESULT_OF_PLAY_TO_RESULT_OF_SET: {
+            const { resultOfPlay } = payload;
+            const newResultOfPlay = { ...resultOfPlay }
+            return {
+                ...state,
+                set: [...state.set, newResultOfPlay],
+            };
+        }
+        case SET_RESULT_OF_PLAY: {
+            const { playerId, rockPaperScissorsType } = payload;
+
+            const newResultOfPlay = { ...state.play };
+            newResultOfPlay[playerId] = rockPaperScissorsType;
+
+            return {
+                ...state,
+                play: newResultOfPlay,
+            };
+        }
         default:
             return state;
     }
