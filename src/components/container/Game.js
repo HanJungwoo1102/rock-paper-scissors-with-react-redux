@@ -10,18 +10,20 @@ import CardPanel from '../presentaitional/CardPanel';
 import { ROCK_PAPER_SCISSORS_TYPE } from '../../constants/rock-paper-scissors';
 import { PLAYER_ID } from '../../constants/player';
 
+const NO_HAND = '';
+
 export default () => {
     const dispatch = useDispatch();
     const { play: playStatus } = useSelector(state => state.status);
     const { play: playResult } = useSelector(state => state.result);
 
-    const [handOfPlayer1, setHandOfPlayer1] = useState('');
-    const [handOfPlayer2, setHandOfPlayer2] = useState('');
+    const [handOfPlayer1, setHandOfPlayer1] = useState(NO_HAND);
+    const [handOfPlayer2, setHandOfPlayer2] = useState(NO_HAND);
 
     useEffect(() => {
         if (playStatus.isStart) {
-            setHandOfPlayer1('');
-            setHandOfPlayer2('');
+            setHandOfPlayer1(NO_HAND);
+            setHandOfPlayer2(NO_HAND);
         } else {
             setHandOfPlayer1(playResult[PLAYER_ID.PLAYER1]);
             setHandOfPlayer2(playResult[PLAYER_ID.PLAYER2]);

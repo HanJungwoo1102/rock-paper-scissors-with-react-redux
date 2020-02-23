@@ -22,14 +22,14 @@ export default () => {
                         let playComponent;
                         if (isWin(player1, player2)) {
                             playComponent = <ScorePlay
-                                playerInfo={[{ type: player1, isWin: true}, {type: player2, isWin: false}]}
+                                playerInfo={[{ type: player1, isWin: true }, { type: player2, isWin: false }]}
                             />;
                             winCountInSet++;
                         }
 
                         if (isLose(player1, player2)) {
                             playComponent = <ScorePlay
-                                playerInfo={[{ type: player1, isWin: false}, {type: player2, isWin: true}]}
+                                playerInfo={[{ type: player1, isWin: false }, { type: player2, isWin: true }]}
                             />;
                             loseCountInSet++;
                         }

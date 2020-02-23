@@ -3,9 +3,7 @@ import { cancel, cancelled, fork, put, select, take, delay } from 'redux-saga/ef
 import * as statusActions from '../actions/status';
 import * as resultActions from '../actions/result';
 
-import { MAX_PLAY_COUNT } from '../constants/game-setting';
-
-const TIME_BETWEEN_PLAY = 3000;
+import { MAX_PLAY_COUNT, TIME_BETWEEN_PLAY } from '../constants/game-setting';
 
 function* setTask() {
     try {
